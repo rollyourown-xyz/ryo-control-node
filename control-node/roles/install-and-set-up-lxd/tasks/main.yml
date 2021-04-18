@@ -50,9 +50,9 @@
   register: lxd_core_trust_password
 
 
-# Write the LXD core trust password to a file on the local machine (for use by later scripts)
+# Write the LXD core trust password to a file to a file in the configuration directory (for use by later scripts)
 #
-- name: Write the LXD core trust password to a file on the local machine
+- name: Write the LXD core trust password to a file in the configuration directory
   template:
     mode: 0640
     owner: "{{ local_non_root_user }}"
@@ -61,14 +61,15 @@
     src: lxd_core_trust_password.yml.j2
     force: yes
     backup: yes
+  when: install_lxd
 
 
-- name: Copy LXD preseed file from template
+- name: Wite the LXD preseed file to a file in the configuration directory
   template:
     mode: 0640
     owner: "{{ local_non_root_user }}"
     group: "{{ local_non_root_user }}"
-    dest: /home/{{ local_non_root_user }}/preseed.yml
+    dest: "{{ playbook_dir }}/../configuration/preseed.yml"
     src: preseed.yml.j2
     force: yes
     backup: yes
@@ -78,7 +79,7 @@
 
 - name: Initialise LXD with preseed file
   shell:
-    cmd: lxd init --preseed < /home/{{ local_non_root_user }}/preseed.yml
+    cmd: "lxd init --preseed < {{ playbook_dir }}/../configuration/preseed.yml"
   when:
     - lxd_preseed_changes_made is changed
     - install_lxd
