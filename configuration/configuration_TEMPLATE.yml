@@ -25,6 +25,7 @@ local_non_root_user: <USER_NAME>
 local_non_root_user_password: <PASSWORD>
 
 
+#----------------------
 # DEFAULT configuration
 #----------------------
 
