@@ -9,6 +9,9 @@
 # REQUIRED Configuration
 #-----------------------
 
+# Copy this file to `configuration.yml` in the same directory and add
+# your own configuration parameters
+
 # Local user configuration
 #-------------------------
 
