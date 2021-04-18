@@ -1,0 +1,22 @@
+## If this file is placed in a different location to the directory `configuration` in 
+# the cloned repository, then config_path.yml **must** be updated with the new path to the file
+
+## WARNING: After adding configuration, never push this file, with secrets, 
+# to a repository or publish in any other way!
+
+
+#-----------------------
+# REQUIRED Configuration
+#-----------------------
+
+# Local user configuration
+#-------------------------
+
+# Enter your non-root username for this machine
+# (note: the user must be a member of the sudo group
+# - `useradd <username> sudo` if not already a sudo user)
+local_non_root_user: <USER_NAME>
+
+# SECRET: Enter your non-root user password for this machine. Enter "" if
+# no password is required (e.g. with a Multipass VM)
+local_non_root_user_password: <PASSWORD>

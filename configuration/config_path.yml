@@ -1,0 +1,3 @@
+---
+# Change this if the project directory is different to ~/ryo-projects
+configuration_path: ~/ryo-projects/ryo-control-node/configuration/configuration.yml
