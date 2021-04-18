@@ -23,12 +23,3 @@ local_non_root_user: <USER_NAME>
 # SECRET: Enter your non-root user password for this machine. Enter "" if
 # no password is required (e.g. with a Multipass VM)
 local_non_root_user_password: <PASSWORD>
-
-
-#----------------------
-# DEFAULT configuration
-#----------------------
-
-# Typically, this does not need to be changed
-# !!! If changed, this also must be changed in project inventory files !!!
-wireguard_address_network_part: "10.0.1"
