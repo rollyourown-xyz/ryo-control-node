@@ -13,7 +13,6 @@
     # Control node configuration switches - do not change unless you know what you are doing
     generate_ssh_keys: true
     install_wireguard: true
-    set_up_wireguard: true
     install_lxd: true
     install_packer: true
     install_terraform: true
@@ -22,7 +21,6 @@
     - role: generate-ssh-keys
     - role: install-sshpass
     - role: install-wireguard
-    - role: set-up-wireguard
     - role: install-and-set-up-lxd
     - role: install-packer
     - role: install-terraform
