@@ -45,6 +45,24 @@
   when: install_lxd
 
 
+- name: Generate a random string as LXD core trust password
+  shell: "tr -dc A-Za-z0-9 </dev/urandom | head -c 12"
+  register: lxd_core_trust_password
+
+
+# Write the LXD core trust password to a file on the local machine (for use by later scripts)
+#
+- name: Write the LXD core trust password to a file on the local machine
+  template:
+    mode: 0640
+    owner: "{{ local_non_root_user }}"
+    group: "{{ local_non_root_user }}"
+    dest: "{{ playbook_dir }}/../configuration/lxd_core_trust_password.yml"
+    src: lxd_core_trust_password.yml.j2
+    force: yes
+    backup: yes
+
+
 - name: Copy LXD preseed file from template
   template:
     mode: 0640
