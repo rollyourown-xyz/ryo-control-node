@@ -24,3 +24,4 @@
     - role: install-and-set-up-lxd
     - role: install-packer
     - role: install-terraform
+    - role: set-up-ca

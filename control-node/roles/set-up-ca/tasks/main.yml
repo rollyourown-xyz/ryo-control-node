@@ -1,0 +1,47 @@
+---
+
+# Create a directory for certificate authority files
+- name: Create a directory for certificate authority files
+  file:
+    mode: 0700
+    owner: root
+    group: root
+    path: "/root/ca"
+    state: directory
+
+
+# Generate a certificate authority private key
+- name: Generate a certificate authority private key
+  openssl_privatekey:
+    owner: root
+    group: root
+    path: /root/ca/ca.pem
+    state: present
+  register: ca_privatekey
+
+
+# Generate a certificate authority CSR
+- name: Generate a certificate authority CSR
+  openssl_csr:
+    owner: root
+    group: root
+    path: /root/ca/ca.csr
+    privatekey_path: "{{ ca_privatekey.filename }}"
+    common_name: "rollyourown.xyz Project CA"
+    organization_name: "rollyourown.xyz Project"
+    organizational_unit_name: "Control Node"
+    state: present
+  register: ca_csr
+
+
+# Generate a certificate authority certificate
+- name: Generate a certificate authority certificate
+  openssl_certificate:
+    owner: root
+    group: root
+    path: /root/ca/ca.crt
+    csr_path: "{{ ca_csr.filename }}"
+    privatekey_path: "{{ ca_privatekey.filename }}"
+    provider: selfsigned
+    selfsigned_not_after: "+36500d"
+    state: present
