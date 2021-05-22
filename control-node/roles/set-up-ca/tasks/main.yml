@@ -27,9 +27,9 @@
     group: root
     path: /root/ca/ca.csr
     privatekey_path: "{{ ca_privatekey.filename }}"
-    common_name: "rollyourown.xyz Project CA"
-    organization_name: "rollyourown.xyz Project"
-    organizational_unit_name: "Control Node"
+    common_name: "rollyourown.xyz Control Node CA"
+    organization_name: "rollyourown.xyz Control Node CA"
+    organizational_unit_name: "Control Node CA"
     state: present
   register: ca_csr
 
