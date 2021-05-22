@@ -15,7 +15,7 @@
   openssl_privatekey:
     owner: root
     group: root
-    path: "{{ playbook_dir }}/../configuration/ca/ca.pem"
+    path: "{{ playbook_dir }}/../configuration/ca/ca.key"
     state: present
   register: ca_privatekey
 
