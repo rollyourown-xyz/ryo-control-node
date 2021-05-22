@@ -4,8 +4,8 @@
 - name: Create a directory for certificate authority files
   file:
     mode: 0700
-    owner: root
-    group: root
+    owner: "{{ local_non_root_user }}"
+    group: "{{ local_non_root_user }}"
     path: "{{ playbook_dir }}/../configuration/ca"
     state: directory
 
