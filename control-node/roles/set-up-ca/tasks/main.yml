@@ -6,7 +6,7 @@
     mode: 0700
     owner: root
     group: root
-    path: "/root/ca"
+    path: "{{ playbook_dir }}/../configuration/ca"
     state: directory
 
 
@@ -15,7 +15,7 @@
   openssl_privatekey:
     owner: root
     group: root
-    path: /root/ca/ca.pem
+    path: "{{ playbook_dir }}/../configuration/ca/ca.pem"
     state: present
   register: ca_privatekey
 
@@ -25,7 +25,7 @@
   openssl_csr:
     owner: root
     group: root
-    path: /root/ca/ca.csr
+    path: "{{ playbook_dir }}/../configuration/ca/ca.csr"
     privatekey_path: "{{ ca_privatekey.filename }}"
     common_name: "rollyourown.xyz Control Node CA"
     organization_name: "rollyourown.xyz Control Node CA"
@@ -39,7 +39,7 @@
   openssl_certificate:
     owner: root
     group: root
-    path: /root/ca/ca.crt
+    path: "{{ playbook_dir }}/../configuration/ca/ca.crt"
     csr_path: "{{ ca_csr.filename }}"
     privatekey_path: "{{ ca_privatekey.filename }}"
     provider: selfsigned
