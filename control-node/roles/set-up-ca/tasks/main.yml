@@ -27,15 +27,25 @@
     group: root
     path: "{{ playbook_dir }}/../configuration/ca/ca.csr"
     privatekey_path: "{{ ca_privatekey.filename }}"
-    common_name: "rollyourown.xyz Control Node CA"
+    common_name: "Control Node Root CA"
+    use_common_name_for_san: false
     organization_name: "rollyourown.xyz Control Node CA"
     organizational_unit_name: "Control Node CA"
+    basic_constraints:
+      - CA:TRUE
+      - pthlen:0
+    basic_constraints_critical: yes
+    key_usage:
+      - keyCertSign
+      - cRLSign
+      - digitalSignature
+    key_usage_critical: yes
     state: present
   register: ca_csr
 
 
-# Generate a certificate authority certificate
-- name: Generate a certificate authority certificate
+# Generate a self-signed CA certificate
+- name: Generate a self-signed CA certificate
   openssl_certificate:
     owner: root
     group: root
@@ -43,5 +53,6 @@
     csr_path: "{{ ca_csr.filename }}"
     privatekey_path: "{{ ca_privatekey.filename }}"
     provider: selfsigned
+    selfsigned_create_subject_key_identifier: always_create
     selfsigned_not_after: "+36500d"
     state: present
