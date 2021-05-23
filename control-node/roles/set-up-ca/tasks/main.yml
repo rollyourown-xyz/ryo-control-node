@@ -33,7 +33,7 @@
     organizational_unit_name: "Control Node CA"
     basic_constraints:
       - CA:TRUE
-      - pthlen:0
+      - pathlen:0
     basic_constraints_critical: yes
     key_usage:
       - keyCertSign
