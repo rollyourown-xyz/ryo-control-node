@@ -1,0 +1,29 @@
+---
+- name: Make sure LXD apt packages are uninstalled and purged
+  apt:
+    name:
+      - lxd
+      - lxd-client
+      - liblxc1
+      - lxcfs
+    update_cache: no
+    purge: yes
+    state: absent
+
+- name: Make sure ZFS Utils are installed
+  apt:
+    name: zfsutils-linux
+    update_cache: yes
+    state: present
+
+- name: Make sure snapd is installed
+  apt:
+    name: snapd
+    update_cache: yes
+    state: present
+
+- name: Make sure LXD snap package is installed
+  snap:
+    name: lxd
+    channel: 4.0/stable
+    state: present
