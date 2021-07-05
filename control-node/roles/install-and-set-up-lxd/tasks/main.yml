@@ -9,14 +9,12 @@
     update_cache: no
     purge: yes
     state: absent
-  when: install_lxd
 
 - name: Make sure ZFS Utils are installed
   apt:
     name: zfsutils-linux
     update_cache: yes
     state: present
-  when: install_lxd
 
 
 - name: Make sure snapd is installed
@@ -24,7 +22,6 @@
     name: snapd
     update_cache: yes
     state: present
-  when: install_lxd
 
 
 - name: Make sure LXD snap package is installed
@@ -32,7 +29,6 @@
     name: lxd
     channel: 4.0/stable
     state: present
-  when: install_lxd
 
 
 - name: Add non-root user to the lxd group
@@ -42,7 +38,6 @@
      - lxd
     append: yes
     state: present
-  when: install_lxd
 
 
 - name: Wite the LXD preseed file to a file in the configuration directory
@@ -55,7 +50,6 @@
     force: yes
     backup: yes
   register: lxd_preseed_changes_made
-  when: install_lxd
 
 
 - name: Initialise LXD with preseed file
@@ -63,7 +57,6 @@
     cmd: "lxd init --preseed < {{ playbook_dir }}/../configuration/preseed.yml"
   when:
     - lxd_preseed_changes_made is changed
-    - install_lxd
 
 
 - name: Add ubuntu-minimal LXD remote
@@ -71,4 +64,3 @@
     cmd: 'lxc remote add --protocol="simplestreams" ubuntu-minimal https://cloud-images.ubuntu.com/minimal/releases/'
   become: yes
   become_user: "{{ local_non_root_user }}"
-  when: install_lxd

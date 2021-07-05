@@ -3,7 +3,6 @@
   apt_key:
     url: https://apt.releases.hashicorp.com/gpg
     state: present
-  when: install_terraform
 
 
 - name: Add HashiCorp repository
@@ -11,7 +10,6 @@
     repo: 'deb https://apt.releases.hashicorp.com focal main'
     state: present
     update_cache: yes
-  when: install_terraform
 
 
 - name: Install terraform
@@ -19,4 +17,3 @@
     name: terraform
     update_cache: yes
     state: present
-  when: install_terraform

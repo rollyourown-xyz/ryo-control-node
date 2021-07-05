@@ -4,5 +4,4 @@
     name: wireguard
     update_cache: yes
     state: present
-  when: install_wireguard
   

@@ -3,25 +3,21 @@
   hosts: local
   
   vars_files:
+    # Control node configuration
     - "{{ playbook_dir }}/../configuration/configuration.yml"
   
   vars:
     ansible_user: "{{ local_non_root_user }}"
     ansible_become: yes
     ansible_become_password: "{{ local_non_root_user_password }}"
-    #
-    # Control node configuration switches - do not change unless you know what you are doing
-    generate_ssh_keys: true
-    install_wireguard: true
-    install_lxd: true
-    install_packer: true
-    install_terraform: true
 
   roles:
     - role: generate-ssh-keys
     - role: install-sshpass
     - role: install-wireguard
-    - role: install-and-set-up-lxd
     - role: install-packer
     - role: install-terraform
+    - role: install-lxd
+    - role: set-up-lxd
     - role: set-up-ca
+    - role: set-up-lxd-certs

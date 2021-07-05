@@ -4,7 +4,6 @@
     name: openssh-client
     update_cache: yes
     state: present
-  when: generate_ssh_keys
 
 
 - name: Create the non-root user .ssh directory, if not present
@@ -23,4 +22,3 @@
     group: "{{ local_non_root_user }}"
     type: rsa
     state: present
-  when: generate_ssh_keys
