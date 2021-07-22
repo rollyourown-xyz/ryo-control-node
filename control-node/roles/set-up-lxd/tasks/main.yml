@@ -32,7 +32,7 @@
 
 - name: Add ubuntu-minimal remote configuration to control node LXD remotes config file
   blockinfile:
-    path: "/home/{{ local_non_root_user }}/snap/lxd/current/.config/lxc/config.yml"
+    path: "/home/{{ local_non_root_user }}/snap/lxd/common/config/config.yml"
     insertafter: "^remotes:"
     block: |2
         ubuntu-minimal:
