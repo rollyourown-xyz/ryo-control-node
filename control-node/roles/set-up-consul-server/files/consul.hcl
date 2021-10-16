@@ -1,4 +1,4 @@
-datacenter = "control_node"
+datacenter = "control-node"
 data_dir   = "/var/consul"
 
 server           = true
