@@ -20,6 +20,7 @@
     - role: install-consul
     - role: install-lxd
     - role: set-up-consul-server
+    - role: set-up-iptables
     - role: set-up-lxd
     - role: set-up-ca
     - role: set-up-lxd-certs

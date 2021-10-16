@@ -41,3 +41,23 @@
     enabled: yes
     state: started
 
+
+# Set up systemd-resolved to resolve local application names via Consul
+#
+
+# Add DNS configuration
+#
+- name: Add DNS configuration
+  lineinfile:
+    dest: /etc/systemd/resolved.conf
+    regexp: '^#DNS='
+    line: "DNS=127.0.0.1"
+
+
+# Add Domains configuration
+#
+- name: Add Domains configuration
+  lineinfile:
+    dest: /etc/systemd/resolved.conf
+    regexp: '^#Domains='
+    line: "Domains=~consul"
