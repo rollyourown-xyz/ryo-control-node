@@ -1,0 +1,43 @@
+---
+
+# Create consul data directory
+#
+- name: Create consul data directory
+  file:
+    path: /var/consul
+    state: directory
+    mode: 0755
+
+
+# Copy consul configuration file
+#
+- name: Copy consul configuration file
+  copy:
+    mode: 0640
+    owner: consul
+    group: consul
+    dest: /etc/consul.d/consul.hcl
+    src: consul.hcl
+    force: yes
+
+
+# Copy consul service definition
+#
+- name: Copy consul service definition
+  copy:
+    mode: 0644
+    owner: root
+    group: root
+    dest: /lib/systemd/system/consul.service
+    src: consul.service
+    force: yes
+
+
+# Enable consul service
+#
+- name: Enable consul service
+  service:
+    name: consul.service
+    enabled: yes
+    state: started
+

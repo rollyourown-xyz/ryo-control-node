@@ -17,7 +17,9 @@
     - role: install-wireguard
     - role: install-packer
     - role: install-terraform
+    - role: install-consul
     - role: install-lxd
+    - role: set-up-consul-server
     - role: set-up-lxd
     - role: set-up-ca
     - role: set-up-lxd-certs
