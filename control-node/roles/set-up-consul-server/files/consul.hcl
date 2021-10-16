@@ -5,7 +5,7 @@ server           = true
 bootstrap_expect = 1
 client_addr      = "0.0.0.0"
 
-# ui_config.enabled = true only for control node, false for hosts
+# ui_config.enabled = true only for dev/testing, false for production
 ui_config = {
   enabled = true
 }
