@@ -4,7 +4,7 @@
 #
 - name: Check existence of a previously generated veth0 MAC address for the host
   stat:
-    path: "{{ playbook_dir }}/../../configuration/veth0_macaddress.yml"
+    path: "{{ playbook_dir }}/../configuration/veth0_macaddress.yml"
   register: veth0_macaddress_file
 
 
@@ -12,13 +12,13 @@
 #
 - name: Load the veth0 MAC address from previously created file
   include_vars:
-    file: "{{ playbook_dir }}/../../configuration/veth0_macaddress.yml"
+    file: "{{ playbook_dir }}/../configuration/veth0_macaddress.yml"
   when: veth0_macaddress_file.stat.exists
 
 
-# Assign the veth0 MAC address to the variable postgres_synapse_user_password (if not previously generated)
+# Generate a veth0 MAC address and assign to the variable postgres_synapse_user_password (if not previously generated)
 #
-- name: Assign the veth0 MAC address to the variable veth0_macaddress
+- name: Generate a veth0 MAC address and assign to the variable veth0_macaddress
   set_fact:
     veth0_macaddress: "{{ '52:54:00' | random_mac }}"
   when: not veth0_macaddress_file.stat.exists
@@ -31,7 +31,7 @@
     mode: 0640
     owner: "{{ local_non_root_user }}"
     group: "{{ local_non_root_user }}"
-    dest: "{{ playbook_dir }}/../../configuration/veth0_macaddress.yml"
+    dest: "{{ playbook_dir }}/../configuration/veth0_macaddress.yml"
     src: veth0_macaddress.yml.j2
     force: yes
     backup: yes
