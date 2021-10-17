@@ -35,7 +35,7 @@
     src: veth0_macaddress.yml.j2
     force: yes
     backup: yes
-  when: veth0_macaddress_file.stat.exists
+  when: not veth0_macaddress_file.stat.exists
 
 
 # Copy netdev configuration file for veth0
