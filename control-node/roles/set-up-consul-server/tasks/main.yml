@@ -12,12 +12,12 @@
 # Copy consul configuration file
 #
 - name: Copy consul configuration file
-  copy:
+  template:
     mode: 0640
     owner: consul
     group: consul
     dest: /etc/consul.d/consul.hcl
-    src: consul.hcl
+    src: consul.hcl.j2
     force: yes
 
 
