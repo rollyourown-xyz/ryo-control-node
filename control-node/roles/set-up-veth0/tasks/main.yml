@@ -61,3 +61,11 @@
     src: 10-veth0.yaml.j2
     force: yes
     backup: no
+
+
+# (Re)start the network service for the veth0 interface
+- name: (Re)start the network service for the veth0 interface
+  service:
+    name: network
+    state: restarted
+    args: "veth0"
