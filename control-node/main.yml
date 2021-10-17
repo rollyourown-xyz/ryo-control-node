@@ -19,6 +19,7 @@
     - role: install-terraform
     - role: install-consul
     - role: install-lxd
+    - role: set-up-veth0
     - role: set-up-consul-server
     - role: set-up-iptables
     - role: set-up-lxd

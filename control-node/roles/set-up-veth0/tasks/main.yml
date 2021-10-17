@@ -1,0 +1,63 @@
+---
+
+# Check existence of a previously generated veth0 MAC address for the host
+#
+- name: Check existence of a previously generated veth0 MAC address for the host
+  stat:
+    path: "{{ playbook_dir }}/../../configuration/veth0_macaddress.yml"
+  register: veth0_macaddress_file
+
+
+# Load the veth0 MAC address from previously created file (if previously generated)
+#
+- name: Load the veth0 MAC address from previously created file
+  include_vars:
+    file: "{{ playbook_dir }}/../../configuration/veth0_macaddress.yml"
+  when: veth0_macaddress_file.stat.exists
+
+
+# Assign the veth0 MAC address to the variable postgres_synapse_user_password (if not previously generated)
+#
+- name: Assign the veth0 MAC address to the variable veth0_macaddress
+  set_fact:
+    veth0_macaddress: "{{ '52:54:00' | random_mac }}"
+  when: not veth0_macaddress_file.stat.exists
+
+
+# Write the veth0 MAC address to a file in the module configuration directory on the local machine (if not previously generated)
+#
+- name: Write the veth0 MAC address to a file in the module configuration directory
+  template:
+    mode: 0640
+    owner: "{{ local_non_root_user }}"
+    group: "{{ local_non_root_user }}"
+    dest: "{{ playbook_dir }}/../../configuration/veth0_macaddress.yml"
+    src: veth0_macaddress.yml.j2
+    force: yes
+    backup: yes
+  when: veth0_macaddress_file.stat.exists
+
+
+# Copy netdev configuration file for veth0
+#
+- name: Copy veth0 netdev configuration file from template
+  template:
+    mode: 0644
+    owner: root
+    group: root
+    dest: /etc/systemd/network/00-veth0.netdev
+    src: 00-veth0.netdev.j2
+    force: yes
+    backup: yes
+
+# Copy veth0 netplan configuration file for veth0
+#
+- name: Copy veth0 netplan configuration file from template
+  template:
+    mode: 0644
+    owner: root
+    group: root
+    dest: /etc/netplan/10-veth0.yaml
+    src: 10-veth0.yaml.j2
+    force: yes
+    backup: yes
