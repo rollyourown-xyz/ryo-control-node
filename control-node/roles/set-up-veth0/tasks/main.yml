@@ -48,7 +48,7 @@
     dest: /etc/systemd/network/00-veth0.netdev
     src: 00-veth0.netdev.j2
     force: yes
-    backup: yes
+    backup: no
 
 # Copy veth0 netplan configuration file for veth0
 #
@@ -60,4 +60,4 @@
     dest: /etc/netplan/10-veth0.yaml
     src: 10-veth0.yaml.j2
     force: yes
-    backup: yes
+    backup: no
