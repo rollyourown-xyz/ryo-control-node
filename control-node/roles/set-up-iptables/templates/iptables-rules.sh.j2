@@ -1,0 +1,8 @@
+#!/bin/sh
+IPT="/sbin/iptables"
+
+## Map DNS port 53 to Consul listening port
+###########################################
+
+$IPT -t nat -A OUTPUT -d localhost -p udp -m udp --dport 53 -j DNAT --to-destination {{ veth0_network_part }}.1:8600
+$IPT -t nat -A OUTPUT -d localhost -p tcp -m tcp --dport 53 -j DNAT --to-destination {{ veth0_network_part }}.1:8600

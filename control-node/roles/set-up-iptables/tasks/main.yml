@@ -3,12 +3,12 @@
 # Copy iptables rules script (making executable)
 #
 - name: Copy firewall rules script
-  copy:
+  template:
     mode: 0770
     owner: root
     group: root
     dest: /usr/local/bin/iptables-rules.sh
-    src: iptables-rules.sh
+    src: iptables-rules.sh.j2
     force: yes
 
 
