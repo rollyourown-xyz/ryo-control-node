@@ -61,3 +61,25 @@
     src: 10-veth0.yaml.j2
     force: yes
     backup: no
+
+
+# Check existence of the NetworkManager configuration file
+#
+- name: Check existence of the NetworkManager configuration file
+  stat:
+    path: /etc/NetworkManager/NetworkManager.conf
+  register: networkmanager_conf_file
+
+
+# Exclude the veth0 interface from NetworkManager control
+#
+- name: Exclude the veth0 interface from NetworkManager control
+  blockinfile:
+    path: /etc/NetworkManager/NetworkManager.conf
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      [keyfile]
+      unmanaged-devices=interface-name:veth0
+    state: present
+  when: networkmanager_conf_file.stat.exists
