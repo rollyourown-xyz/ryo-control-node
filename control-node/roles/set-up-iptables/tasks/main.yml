@@ -2,7 +2,7 @@
 
 # Copy iptables rules script (making executable)
 #
-- name: Copy firewall rules script
+- name: Copy iptables rules rules script
   template:
     mode: 0770
     owner: root
@@ -12,9 +12,9 @@
     force: yes
 
 
-# Copy firewall service definition
+# Copy iptables rules service definition
 #
-- name: Copy firewall service definition
+- name: Copy iptables rules service definition
   copy:
     mode: 0644
     owner: root
@@ -26,7 +26,7 @@
 
 # Enable iptables rules service
 #
-- name: Enable firewall service
+- name: Enable iptables rules service
   service:
     name: iptables-rules.service
     enabled: yes
