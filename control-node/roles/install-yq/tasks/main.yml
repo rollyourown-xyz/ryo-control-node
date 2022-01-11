@@ -1,0 +1,18 @@
+---
+- name: Make sure yq apt packages are uninstalled and purged
+  apt:
+    name: yq
+    update_cache: no
+    purge: yes
+    state: absent
+
+- name: Make sure snapd is installed
+  apt:
+    name: snapd
+    update_cache: yes
+    state: present
+
+- name: Make sure yq snap package is installed
+  snap:
+    name: yq
+    state: present

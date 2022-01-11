@@ -17,6 +17,7 @@
     - role: install-wireguard
     - role: install-packer
     - role: install-terraform
+    - role: install-yq
     - role: install-consul
     - role: install-lxd
     - role: set-up-veth0
