@@ -12,6 +12,7 @@
     ansible_become_password: "{{ local_non_root_user_password }}"
 
   roles:
+    - role: system-upgrade
     - role: generate-ssh-keys
     - role: install-sshpass
     - role: install-wireguard
