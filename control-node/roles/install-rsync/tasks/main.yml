@@ -1,0 +1,6 @@
+---
+- name: Install rsync
+  apt:
+    name: rsync
+    update_cache: yes
+    state: present
