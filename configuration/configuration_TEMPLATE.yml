@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2022 Wilfred Nicoll <xyzroller@rollyourown.xyz>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 ## If this file is placed in a different location to the directory `configuration` in 
 # the cloned repository, then config_path.yml **must** be updated with the new path to the file
 
