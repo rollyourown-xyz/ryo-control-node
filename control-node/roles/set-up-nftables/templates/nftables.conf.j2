@@ -23,8 +23,8 @@ table inet nat {
         type nat hook prerouting priority dstnat;
 
         # Map localhost DNS port 53 to Consul listening port
-        iifname "lo" udp dport 53 dnat to {{ veth0_network_part }}.1:8600
-        iifname "lo" tcp dport 53 dnat to {{ veth0_network_part }}.1:8600
+        iifname "lo" udp dport 53 dnat ip to {{ veth0_network_part }}.1:8600
+        iifname "lo" tcp dport 53 dnat ip to {{ veth0_network_part }}.1:8600
     }
 
     chain postrouting {
