@@ -23,15 +23,15 @@ table inet nat {
         type nat hook prerouting priority dstnat;
     }
 
-    chain postrouting {
-        type nat hook postrouting priority srcnat;
-    }
-
     chain output {
         type nat hook output priority filter;
 
         # Map localhost DNS port 53 to Consul listening port
         ip daddr 127.0.0.1 udp dport 53 dnat ip to {{ veth0_network_part }}.1:8600
         ip daddr 127.0.0.1 tcp dport 53 dnat ip to {{ veth0_network_part }}.1:8600
+    }
+
+    chain postrouting {
+        type nat hook postrouting priority srcnat;
     }
 }
