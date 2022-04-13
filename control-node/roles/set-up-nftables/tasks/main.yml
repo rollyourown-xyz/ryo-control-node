@@ -1,0 +1,15 @@
+---
+# SPDX-FileCopyrightText: 2022 Wilfred Nicoll <xyzroller@rollyourown.xyz>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+
+# Copy nftables configuration
+#
+- name: Copy nftables configuration
+  template:
+    mode: 0770
+    owner: root
+    group: root
+    dest: /etc/nftables.conf
+    src: nftables.conf.j2
+    force: yes

@@ -1,0 +1,33 @@
+#!/usr/sbin/nft -f
+# SPDX-FileCopyrightText: 2022 Wilfred Nicoll <xyzroller@rollyourown.xyz>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# Flush rules
+flush ruleset
+
+table inet filter {
+        chain input {
+                type filter hook input priority 0;
+        }
+        chain forward {
+                type filter hook forward priority 0;
+        }
+        chain output {
+                type filter hook output priority 0;
+        }
+}
+
+table inet nat {
+
+    chain prerouting {
+        type nat hook prerouting priority dstnat;
+
+        # Map localhost DNS port 53 to Consul listening port
+        iifname "lo" udp dport 53 dnat to {{ veth0_network_part }}.1:8600
+        iifname "lo" tcp dport 53 dnat to {{ veth0_network_part }}.1:8600
+    }
+
+    chain postrouting {
+        type nat hook postrouting priority srcnat;
+    }
+}

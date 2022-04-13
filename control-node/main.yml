@@ -17,6 +17,7 @@
   roles:
     - role: system-upgrade
     - role: generate-ssh-keys
+#    - role: install-nftables
     - role: install-sshpass
     - role: install-wireguard
     - role: install-packer
@@ -28,6 +29,7 @@
     - role: set-up-veth0
     - role: set-up-consul-server
     - role: set-up-iptables
+#    - role: set-up-nftables
     - role: set-up-lxd
     - role: set-up-ca
     - role: set-up-lxd-certs
