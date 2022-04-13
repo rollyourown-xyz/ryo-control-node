@@ -17,7 +17,7 @@ A detailed description of how to use a rollyourown.xyz project to deploy and mai
 
 To deploy a control node:
 
-1. Install Ubuntu 20.04 LTS on a computer or virtual machine
+1. Install Ubuntu 20.04 LTS or 22.04 LTS on a computer or virtual machine
 
 2. Log in as a non-root user, upgrade the system and then reboot to apply any system changes
 
