@@ -10,7 +10,7 @@ network:
         veth0:
             dhcp4: no
             dhcp6: no
-            accept-ra: no
+            accept-ra: yes
             addresses:
             - {{ veth0_network_part }}.1/32
             #
