@@ -8,22 +8,14 @@ domain     = "ryo"
 server                = true
 bootstrap_expect      = 1
 
-#
-# THE FOLLOWING IS EXPERIMENTAL
-#client_addr           = "{{ veth0_network_part }}.1"   
-client_addr           = "{{ veth0_network_ipv6_prefix }}::1"
+client_addr = "{{ veth0_network_ipv6_prefix }}::1"
+bind_addr   = "{{ veth0_network_ipv6_prefix }}::1"
 
-#bind_addr             = "{{ veth0_network_part }}.1"
-bind_addr             = "{{ veth0_network_ipv6_prefix }}::1"
+advertise_addr_ipv4 = "{{ veth0_network_part }}.1"
+advertise_addr_ipv6 = "{{ veth0_network_ipv6_prefix }}::1"
 
-#advertise_addr        = "{{ veth0_network_part }}.1"
-advertise_addr_ipv4   = "{{ veth0_network_part }}.1"
-advertise_addr_ipv6   = "{{ veth0_network_ipv6_prefix }}::1"
-
-#advertise_addr_wan    = "{{ veth0_network_part }}.1"
-advertise_addr_wan    = "{{ veth0_network_ipv6_prefix }}::1"
-# END EXPERIMENTAL
-#
+advertise_addr_wan_ipv4 = "{{ veth0_network_part }}.1"
+advertise_addr_wan_ipv6 = "{{ veth0_network_ipv6_prefix }}::1"
 
 retry_join_wan = [
 ]

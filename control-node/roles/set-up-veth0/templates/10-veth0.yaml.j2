@@ -13,10 +13,6 @@ network:
             accept-ra: yes
             addresses:
             - {{ veth0_network_part }}.1/32
-            #
-            # THE FOLLOWING IS EXPERIMENTAL
             - {{ veth0_network_ipv6_prefix }}::1/128
-            # END EXPERIMENTAL
-            #
             match:
                 macaddress: {{ veth0_macaddress }}
