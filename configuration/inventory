@@ -2,4 +2,4 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 [local]
-127.0.0.1   ansible_connection=local    ansible_python_interpreter="{{ansible_playbook_python}}"
+::1    ansible_connection=local    ansible_python_interpreter="{{ansible_playbook_python}}"
