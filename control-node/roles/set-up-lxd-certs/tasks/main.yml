@@ -22,7 +22,6 @@
     path: "{{ playbook_dir }}/../configuration/ca/control-node-server.csr"
     privatekey_path: "{{ cn_server_privatekey.filename }}"
     common_name: "control.ryo-project"
-    # subject_alt_name: "IP:{{ wireguard_address_network_part }}.1"
     organization_name: "rollyourown.xyz Control Node"
     organizational_unit_name: "Control Node"
     state: present
