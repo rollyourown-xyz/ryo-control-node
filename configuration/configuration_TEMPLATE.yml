@@ -41,9 +41,3 @@ veth0_network_ipv6_prefix: "fd10:10:100:100"
 # otherwise enter the paths to the non-root user's SSH private and public keys here
 local_non_root_user_ssh_private_key_file_path: "/home/{{ local_non_root_user }}/.ssh/ryo_id_ssh_rsa" 
 local_non_root_user_ssh_public_key_file_path: "/home/{{ local_non_root_user }}/.ssh/ryo_id_ssh_rsa.pub"
-
-# Change to 'true' if 2FA should be used for non-root user login via public 
-# SSH port and enter the path to the non-root user's google authenticator 
-# configuration file
-local_non_root_use_google_authenticator: false
-local_non_root_user_google_authenticator_file: <PATH>
