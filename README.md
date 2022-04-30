@@ -5,15 +5,15 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 
 # Roll Your Own Control Node
 
-This repository contains automation code to set up a [rollyourown.xyz](https://rollyourown.xyz) [control node](https://rollyourown.xyz/rollyourown/how_to_use/control_node/).
+This repository contains automation code to set up a rollyourown [control node](https://rollyourown.xyz/rollyourown/how_to_use/control_node/).
 
 ## Summary
 
-This project uses [Ansible](https://www.ansible.com/) to deploy the software and configuration needed for a [rollyourown.xyz control node](https://rollyourown.xyz/rollyourown/how_to_use/control_node/).
+This project uses [Ansible](https://www.ansible.com/) to deploy the software and configuration needed for a [rollyourown control node](https://rollyourown.xyz/rollyourown/how_to_use/control_node/).
 
 ## How to Use
 
-A detailed description of how to use a rollyourown.xyz project to deploy and maintain an open source solution can be found [on the rollyourown.xyz website](https://rollyourown.xyz/rollyourown/how_to_use/).
+A detailed description of how to use a rollyourown project to deploy and maintain an open source solution can be found [on the rollyourown website](https://rollyourown.xyz/rollyourown/how_to_use/).
 
 To deploy a control node:
 
@@ -47,27 +47,27 @@ To deploy a control node:
 
         nano configuration/configuration.yml
 
-7. Run the control node setup automation script `local-setup.sh` from the `ryo-control-node` directory to prepare the control node for deploying [rollyourown.xyz projects](https://rollyourown.xyz/rollyourown/projects/):
+7. Run the control node setup automation script `local-setup.sh` from the `ryo-control-node` directory to prepare the control node for deploying [rollyourown projects](https://rollyourown.xyz/rollyourown/projects/):
 
         ./local-setup.sh
 
 8. After running the local-setup script, **reboot the control node**
 
-Now proceed and deploy [rollyourown.xyz projects](https://rollyourown.xyz/rollyourown/projects/).
+Now proceed and deploy [rollyourown projects](https://rollyourown.xyz/rollyourown/projects/).
 
 ## How to Collaborate
 
-We would be delighted if you would like to contribute to [rollyourown.xyz](https://rollyourown.xyz) and there are a number of ways you can collaborate on this project:
+We would be delighted if you would like to contribute to rollyourown and there are a number of ways you can collaborate on this project:
 
 - [Raising security-related issues](https://rollyourown.xyz/collaborate/security_vulnerabilities/)
 - [Contributing bug reports, feature requests and ideas](https://rollyourown.xyz/collaborate/bug_reports_feature_requests_ideas/)
 - [Improving the project](https://rollyourown.xyz/collaborate/existing_projects_and_modules/) - e.g. to provide fixes or enhancements
 
-You may also like to contribute to the wider [rollyourown.xyz](https://rollyourown.xyz/) project by, for example:
+You may also like to contribute to the wider rollyourown project by, for example:
 
 - [Contributing a new project or module](https://rollyourown.xyz/collaborate/new_projects_and_modules/)
-- [Contributing to the rollyourown.xyz website content](https://rollyourown.xyz/collaborate/website_content/) or [design](https://rollyourown.xyz/collaborate/website_design/)
-- [Maintaining a rollyourown.xyz repository](https://rollyourown.xyz/collaborate/working_with_git/what_is_git/#project-maintainer)
+- [Contributing to the rollyourown website content](https://rollyourown.xyz/collaborate/website_content/) or [design](https://rollyourown.xyz/collaborate/website_design/)
+- [Maintaining a rollyourown repository](https://rollyourown.xyz/collaborate/working_with_git/what_is_git/#project-maintainer)
 
 Issues for this project can be submitted on [Codeberg](https://codeberg.org/) (_preferred_) or [GitHub](https://github.com/):
 
@@ -76,7 +76,7 @@ Issues for this project can be submitted on [Codeberg](https://codeberg.org/) (_
 
 ## Security Vulnerabilities
 
-If you have found a security vulnerability in any [rollyourown.xyz](https://rollyourown.xyz/) service or any of the [rollyourown.xyz](https://rollyourown.xyz/) projects, modules or other repositories, please read our [security disclosure policy](https://rollyourown.xyz/collaborate/security_vulnerabilities/) and report this via our [security vulnerability report form](https://forms.rollyourown.xyz/security-vulnerability).
+If you have found a security vulnerability in any rollyourown service or any of the rollyourown projects, modules or other repositories, please read our [security disclosure policy](https://rollyourown.xyz/collaborate/security_vulnerabilities/) and report this via our [security vulnerability report form](https://forms.rollyourown.xyz/security-vulnerability).
 
 ## Repository Links
 
