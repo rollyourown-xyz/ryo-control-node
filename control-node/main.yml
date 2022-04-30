@@ -23,6 +23,7 @@
     - role: install-packer
     - role: install-terraform
     - role: install-yq
+    - role: install-curl
     - role: install-rsync
     - role: install-consul
     - role: install-lxd
