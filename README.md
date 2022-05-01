@@ -17,7 +17,7 @@ A detailed description of how to use a rollyourown project to deploy and maintai
 
 To deploy a control node:
 
-1. Install Ubuntu 20.04 LTS or 22.04 LTS on a computer or virtual machine
+1. Install Ubuntu 22.04 LTS on a computer or virtual machine
 
 2. Log in as a non-root user, upgrade the system and then reboot to apply any system changes
 
@@ -71,7 +71,7 @@ You may also like to contribute to the wider rollyourown project by, for example
 
 Issues for this project can be submitted on [Codeberg](https://codeberg.org/) (_preferred_) or [GitHub](https://github.com/):
 
-- Issues on Codeberg: [here](https://codeberg.org/rollyourown-xyz/ryo-control-node>/issues)
+- Issues on Codeberg: [here](https://codeberg.org/rollyourown-xyz/ryo-control-node/issues)
 - Issues on GitHub: [here](https://github.com/rollyourown-xyz/ryo-control-node/issues)
 
 ## Security Vulnerabilities
