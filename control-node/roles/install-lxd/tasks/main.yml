@@ -28,5 +28,8 @@
 - name: Make sure LXD snap package is installed
   snap:
     name: lxd
-    channel: 4.0/stable
+    channel: 5.0/stable
     state: present
+
+- name: Ensure the LXD snap package is updated
+  command: snap refresh --channel=5.0/stable lxd
