@@ -22,7 +22,7 @@
     path: "{{ playbook_dir }}/../configuration/ca/control-node-server.csr"
     privatekey_path: "{{ cn_server_privatekey.filename }}"
     common_name: "control.ryo-project"
-    organization_name: "rollyourown.xyz Control Node"
+    organization_name: "rollyourown Control Node"
     organizational_unit_name: "Control Node"
     state: present
   register: cn_server_csr
@@ -57,7 +57,7 @@
     path: "{{ playbook_dir }}/../configuration/ca/control-node-client.csr"
     privatekey_path: "{{ cn_client_privatekey.filename }}"
     common_name: "control.ryo-project"
-    organization_name: "rollyourown.xyz Control Node"
+    organization_name: "rollyourown Control Node"
     organizational_unit_name: "Control Node"
     state: present
   register: cn_client_csr

@@ -32,7 +32,7 @@
     privatekey_path: "{{ ca_privatekey.filename }}"
     common_name: "Control Node Root CA"
     use_common_name_for_san: false
-    organization_name: "rollyourown.xyz Control Node CA"
+    organization_name: "rollyourown Control Node CA"
     organizational_unit_name: "Control Node CA"
     basic_constraints:
       - CA:TRUE
