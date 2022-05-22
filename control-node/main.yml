@@ -15,6 +15,7 @@
     ansible_become_password: "{{ local_non_root_user_password }}"
 
   roles:
+    - role: install-python-packages
     - role: system-upgrade
     - role: generate-ssh-keys
     - role: install-nftables

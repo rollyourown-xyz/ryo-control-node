@@ -1,0 +1,12 @@
+---
+# SPDX-FileCopyrightText: 2022 Wilfred Nicoll <xyzroller@rollyourown.xyz>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: Install python packages
+  apt:
+    name: 
+    - python3-packaging
+    - python3-distutils
+    - python3-passlib
+    update_cache: yes
+    state: present
