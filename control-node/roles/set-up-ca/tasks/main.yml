@@ -12,16 +12,27 @@
     path: "{{ playbook_dir }}/../configuration/ca"
     state: directory
 
+# Check existence of a previously generated CA private key
+- name: Check existence of a previously generated CA private key
+  stat:
+    path: "{{ playbook_dir }}/../configuration/ca/ca.key"
+  register: ca_key_file
 
-# Generate a certificate authority private key
-- name: Generate a certificate authority private key
+# Generate a CA private key
+- name: Generate a CA private key
   openssl_privatekey:
     owner: root
     group: root
     path: "{{ playbook_dir }}/../configuration/ca/ca.key"
     state: present
   register: ca_privatekey
+  when: not ca_key_file.stat.exists
 
+# Check existence of a previously generated CA CSR
+- name: Check existence of a previously generated CA CSR
+  stat:
+    path: "{{ playbook_dir }}/../configuration/ca/ca.csr"
+  register: ca_csr_file
 
 # Generate a certificate authority CSR
 - name: Generate a certificate authority CSR
@@ -45,7 +56,13 @@
     key_usage_critical: yes
     state: present
   register: ca_csr
+  when: not ca_csr_file.stat.exists
 
+# Check existence of a previously generated CA certificate
+- name: Check existence of a previously generated CA certificate
+  stat:
+    path: "{{ playbook_dir }}/../configuration/ca/ca.crt"
+  register: ca_crt_file
 
 # Generate a self-signed CA certificate
 - name: Generate a self-signed CA certificate
@@ -59,3 +76,30 @@
     selfsigned_create_subject_key_identifier: always_create
     selfsigned_not_after: "+36500d"
     state: present
+  when: not ca_crt_file.stat.exists
+
+
+## Add the CA cert as trusted
+
+# Ensure certs directory exists
+- name: Ensure certs directory exists
+  file:
+    path: /usr/local/share/ca-certificates
+    state: directory
+
+# Install CA certificate to certs directory
+- name: Install CA certificate to certs directory
+  copy:
+    mode: 0664
+    owner: root
+    group: root
+    dest: "/usr/local/share/ca-certificates/control-node-root-ca.crt"
+    src: "{{ playbook_dir }}/../configuration/ca/ca.crt"
+    force: yes
+
+# Update certificate index
+- name: Update certificate index
+  shell:
+    cmd: /usr/sbin/update-ca-certificates
+
+

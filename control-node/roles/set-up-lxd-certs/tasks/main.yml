@@ -4,7 +4,13 @@
 
 
 ## Generate LXD server and client certs for the control node
-  
+
+# Check existence of a previously generated control node LXD server private key
+- name: Check existence of a previously generated control node LXD server private key
+  stat:
+    path: "{{ playbook_dir }}/../configuration/ca/control-node-server.key"
+  register: control_node_server_key_file
+
 # Generate a control node LXD server private key
 - name: Generate a control node LXD server private key
   openssl_privatekey:
@@ -13,6 +19,13 @@
     path: "{{ playbook_dir }}/../configuration/ca/control-node-server.key"
     state: present
   register: cn_server_privatekey
+  when: not control_node_server_key_file.stat.exists
+
+# Check existence of a previously generated control node LXD server CSR
+- name: Check existence of a previously generated control node LXD server CSR
+  stat:
+    path: "{{ playbook_dir }}/../configuration/ca/control-node-server.csr"
+  register: control_node_server_csr_file
 
 # Generate a CSR for the control node LXD server
 - name: Generate a CSR for the control node LXD server
@@ -26,9 +39,16 @@
     organizational_unit_name: "Control Node"
     state: present
   register: cn_server_csr
+  when: not control_node_server_csr_file.stat.exists
 
-# Sign the control node LXD server CSR with the CA certificate and key
-- name: Sign the control node LXD server CSR with the CA certificate and key
+# Check existence of a previously generated control node LXD server certificate
+- name: Check existence of a previously generated control node LXD server certificate
+  stat:
+    path: "{{ playbook_dir }}/../configuration/ca/control-node-server.crt"
+  register: control_node_server_crt_file
+
+# Generate a control node LXD server certificate signed by the CA certificate and key
+- name: Generate a control node LXD server certificate signed by the CA certificate and key
   openssl_certificate:
     owner: "{{ local_non_root_user }}"
     group: "{{ local_non_root_user }}"
@@ -39,6 +59,13 @@
     ownca_path: "{{ playbook_dir }}/../configuration/ca/ca.crt"
     ownca_privatekey_path: "{{ playbook_dir }}/../configuration/ca/ca.key"
     state: present
+  when: not control_node_server_crt_file.stat.exists
+
+# Check existence of a previously generated control node LXD client private key
+- name: Check existence of a previously generated control node LXD client private key
+  stat:
+    path: "{{ playbook_dir }}/../configuration/ca/control-node-client.key"
+  register: control_node_client_key_file
 
 # Generate a control node LXD client private key
 - name: Generate a control node LXD client private key
@@ -48,6 +75,13 @@
     path: "{{ playbook_dir }}/../configuration/ca/control-node-client.key"
     state: present
   register: cn_client_privatekey
+  when: not control_node_client_key_file.stat.exists
+
+# Check existence of a previously generated control node LXD client CSR
+- name: Check existence of a previously generated control node LXD CSR
+  stat:
+    path: "{{ playbook_dir }}/../configuration/ca/control-node-client.csr"
+  register: control_node_client_csr_file
 
 # Generate a CSR for the control node LXD client
 - name: Generate a CSR for the control node LXD client
@@ -61,9 +95,16 @@
     organizational_unit_name: "Control Node"
     state: present
   register: cn_client_csr
+  when: not control_node_client_csr_file.stat.exists
 
-# Sign the control node LXD client CSR with the CA certificate and key
-- name: Sign the control node LXD client CSR with the CA certificate and key
+# Check existence of a previously generated control node LXD client certificate
+- name: Check existence of a previously generated control node LXD client certificate
+  stat:
+    path: "{{ playbook_dir }}/../configuration/ca/control-node-client.crt"
+  register: control_node_client_crt_file
+
+# Generate a control node LXD client certificate signed by the CA certificate and key
+- name: Generate a control node LXD client certificate signed by the CA certificate and key
   openssl_certificate:
     owner: "{{ local_non_root_user }}"
     group: "{{ local_non_root_user }}"
@@ -74,29 +115,7 @@
     ownca_path: "{{ playbook_dir }}/../configuration/ca/ca.crt"
     ownca_privatekey_path: "{{ playbook_dir }}/../configuration/ca/ca.key"
     state: present
-
-
-## Add the control node CA cert as trusted
-
-# Ensure certs directory exists
-- name: Ensure certs directory exists
-  file:
-    path: /usr/local/share/ca-certificates
-    state: directory
-
-# Install CA certificate to certs directory
-- name: Install CA certificate to certs directory
-  copy:
-    mode: 0664
-    owner: root
-    group: root
-    dest: "/usr/local/share/ca-certificates/control-node-ca.crt"
-    src: "{{ playbook_dir }}/../configuration/ca/ca.crt"
-
-# Update certificate index
-- name: Update certificate index
-  shell:
-    cmd: /usr/sbin/update-ca-certificates
+  when: not control_node_client_crt_file.stat.exists
 
 
 ## Add control node client certificate and key
@@ -109,6 +128,7 @@
     group: "{{ local_non_root_user }}"
     dest: "/home/{{ local_non_root_user }}/snap/lxd/common/config/client.crt"
     src: "{{ playbook_dir }}/../configuration/ca/control-node-client.crt"
+    force: yes
 
 # Copy control node client private key
 - name: Copy control node client private key
@@ -118,6 +138,7 @@
     group: "{{ local_non_root_user }}"
     dest: "/home/{{ local_non_root_user }}/snap/lxd/common/config/client.key"
     src: "{{ playbook_dir }}/../configuration/ca/control-node-client.key"
+    force: yes
 
 
 ## Add control node server certificate and key
@@ -130,6 +151,7 @@
     group: root
     dest: "/var/snap/lxd/common/lxd/server.crt"
     src: "{{ playbook_dir }}/../configuration/ca/control-node-server.crt"
+    force: yes
 
 # Copy control node server private key
 - name: Copy control node server private key
@@ -139,6 +161,7 @@
     group: root
     dest: "/var/snap/lxd/common/lxd/server.key"
     src: "{{ playbook_dir }}/../configuration/ca/control-node-server.key"
+    force: yes
 
 
 ## Enable PKI mode: copy CA certificate to client and server configuration
@@ -151,6 +174,7 @@
     group: root
     dest: "/var/snap/lxd/common/lxd/server.ca"
     src: "{{ playbook_dir }}/../../ryo-control-node/configuration/ca/ca.crt"
+    force: yes
 
 # Copy CA certificate to control node client configuration
 - name: Copy CA certificate to control node client configuration
@@ -160,3 +184,4 @@
     group: root
     dest: "/home/{{ local_non_root_user }}/snap/lxd/common/config/client.ca"
     src: "{{ playbook_dir }}/../../ryo-control-node/configuration/ca/ca.crt"
+    force: yes
